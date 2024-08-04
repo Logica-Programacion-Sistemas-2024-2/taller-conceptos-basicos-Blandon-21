@@ -6,16 +6,24 @@ package sistemas;
 public class App {
     
     // Diseñe un algoritmo para saludar al usuario: Hola usuario. El nombre del usuario es ingresado por teclado
-    import java.util.Scanner;
+   import java.util.Scanner;
 
 public class SaludarUsuario {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese su nombre: ");
-        String nombre = scanner.nextLine();
-        System.out.println("Hola " + nombre + "!");
+    public static String saludarUsuario(String nombre) {
+        try {
+            // Verificar si el nombre es vacío
+            if (nombre.isEmpty()) {
+                return "Error: Debe ingresar un nombre";
+            }
+
+            // Saludar al usuario
+            String saludo = "Hola " + nombre + "!";
+            return saludo;
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
+        }
     }
-}
+
 
     // Diseñe un algoritmo que lea por teclado una velocidad en Km/seg y la convierta a metros/seg y a metros/hora
     // retorne el valor en formato string (metrosPorSeg + "|" + metrosPorHora)
