@@ -6,35 +6,41 @@ package sistemas;
 public class App {
     
     // Diseñe un algoritmo para saludar al usuario: Hola usuario. El nombre del usuario es ingresado por teclado
-   import java.util.Scanner;
-
-public class SaludarUsuario {
-    public static String saludarUsuario(String nombre) {
-        try {
-            // Verificar si el nombre es vacío
-            if (nombre.isEmpty()) {
-                return "Error: Debe ingresar un nombre";
-            }
-
-            // Saludar al usuario
-            String saludo = "Hola " + nombre + "!";
-            return saludo;
-        } catch (Exception e) {
-            return "Error: " + e.getMessage();
-        }
-    }
 
 
     // Diseñe un algoritmo que lea por teclado una velocidad en Km/seg y la convierta a metros/seg y a metros/hora
     // retorne el valor en formato string (metrosPorSeg + "|" + metrosPorHora)
+    import java.util.Scanner;
+
+public class ConvertirVelocidad {
     public static String convertirVelocidad(double kmPorSeg) {
         try {
-            // Lógica interna
+            // Verificar si la velocidad es negativa
+            if (kmPorSeg < 0) {
+                return "Error: La velocidad no puede ser negativa";
+            }
+
+            // Convertir km/seg a metros/seg
+            double metrosPorSeg = kmPorSeg * 1000;
+
+            // Convertir km/seg a metros/hora
+            double metrosPorHora = kmPorSeg * 1000 * 3600;
+
+            // Retornar el valor en formato string
+            return String.format("%.2f|%.2f", metrosPorSeg, metrosPorHora);
         } catch (Exception e) {
             return "0|0";
         }
-        return "";
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la velocidad en km/seg: ");
+        double kmPorSeg = scanner.nextDouble();
+        String resultado = convertirVelocidad(kmPorSeg);
+        System.out.println(resultado);
+    }
+}
 
     // Solicitar al usuario ingresar una cantidad expresada en cc (centímetros cúbicos) y devolver su cantidad en litros
     public static int convertirCcALitros(double cc) {
