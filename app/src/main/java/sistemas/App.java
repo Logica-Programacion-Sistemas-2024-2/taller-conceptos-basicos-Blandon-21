@@ -6,66 +6,221 @@ package sistemas;
 public class App {
     
     // Diseñe un algoritmo para saludar al usuario: Hola usuario. El nombre del usuario es ingresado por teclado
+import java.util.Scanner;
+
+public class SaludarUsuario {
     public static String saludarUsuario(String nombre) {
         try {
-            // Lógica interna
+            // Verificar si el nombre es vacío
+            if (nombre.isEmpty()) {
+                return "Error: Debe ingresar un nombre";
+            }
+
+            // Saludar al usuario
+            String saludo = "Hola " + nombre + "!";
+            return saludo;
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
-        return "";
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese su nombre: ");
+        String nombre = scanner.nextLine();
+        String resultado = saludarUsuario(nombre);
+        System.out.println(resultado);
+    }
+}
 
     // Diseñe un algoritmo que lea por teclado una velocidad en Km/seg y la convierta a metros/seg y a metros/hora
     // retorne el valor en formato string (metrosPorSeg + "|" + metrosPorHora)
+    import java.util.Scanner;
+
+public class ConvertirVelocidad {
     public static String convertirVelocidad(double kmPorSeg) {
         try {
-            // Lógica interna
+            // Verificar si la velocidad es negativa
+            if (kmPorSeg < 0) {
+                return "Error: La velocidad no puede ser negativa";
+            }
+
+            // Convertir km/seg a metros/seg
+            double metrosPorSeg = kmPorSeg * 1000;
+
+            // Convertir km/seg a metros/hora
+            double metrosPorHora = kmPorSeg * 1000 * 3600;
+
+            // Retornar el valor en formato string
+            return String.format("%.2f|%.2f", metrosPorSeg, metrosPorHora);
         } catch (Exception e) {
             return "0|0";
         }
-        return "";
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la velocidad en km/seg: ");
+        double kmPorSeg = scanner.nextDouble();
+        String resultado = convertirVelocidad(kmPorSeg);
+        System.out.println(resultado);
+    }
+}
 
     // Solicitar al usuario ingresar una cantidad expresada en cc (centímetros cúbicos) y devolver su cantidad en litros
-    public static int convertirCcALitros(double cc) {
+   import java.util.Scanner;
+
+public class ConvertirCcALitros {
+    public static double convertirCcALitros(double cc) {
         try {
-            // Lógica interna
+            // Verificar si la cantidad es negativa
+            if (cc < 0) {
+                throw new Exception("La cantidad no puede ser negativa");
+            }
+
+            // Convertir cc a litros
+            double litros = cc / 1000;
+
+            // Retornar el valor
+            return litros;
         } catch (Exception e) {
             return -1;
         }
-        return 0;
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la cantidad en cc: ");
+        double cc = scanner.nextDouble();
+        double resultado = convertirCcALitros(cc);
+        if (resultado == -1) {
+            System.out.println("Error: La cantidad no puede ser negativa");
+        } else {
+            System.out.println(cc + " cc es igual a " + resultado + " litros");
+        }
+    }
+}
     // Solicitar al usuario ingresar una cantidad en dólares y convertirla a pesos según la TRM del día
-    public static int convertirDolaresAPesos(double dolares, double trm) {
+   import java.util.Scanner;
+
+public class ConvertirDolaresAPesos {
+    public static double convertirDolaresAPesos(double dolares, double trm) {
         try {
-            // Lógica interna
+            // Verificar si la cantidad es negativa
+            if (dolares < 0) {
+                throw new Exception("La cantidad no puede ser negativa");
+            }
+
+            // Verificar si la TRM es válida
+            if (trm <= 0) {
+                throw new Exception("La TRM no puede ser cero o negativa");
+            }
+
+            // Convertir dólares a pesos
+            double pesos = dolares * trm;
+
+            // Retornar el valor
+            return pesos;
         } catch (Exception e) {
             return -1;
         }
-        return 0;
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la cantidad en dólares: ");
+        double dolares = scanner.nextDouble();
+        System.out.print("Ingrese la TRM del día: ");
+        double trm = scanner.nextDouble();
+        double resultado = convertirDolaresAPesos(dolares, trm);
+        if (resultado == -1) {
+            System.out.println("Error: La cantidad o la TRM no son válidas");
+        } else {
+            System.out.println(dolares + " dólares es igual a " + resultado + " pesos");
+        }
+    }
+}
     // Solicitar al usuario ingresar la temperatura en grados centígrados y convertirla en grados Fahrenheit (averiguar la fórmula) F = 32 + ( 9 * C / 5)
-    public static int convertirCelsiusAFahrenheit(double celsius) {
+   import java.util.Scanner;
+
+public class ConvertirCelsiusAFahrenheit {
+    public static double convertirCelsiusAFahrenheit(double celsius) {
         try {
-            // Lógica interna
+            // Verificar si la temperatura es válida
+            if (celsius < -273.15) {
+                throw new Exception("La temperatura no puede ser menor que el cero absoluto");
+            }
+
+            // Convertir Celsius a Fahrenheit
+            double fahrenheit = 32 + (9 * celsius / 5);
+
+            // Retornar el valor
+            return fahrenheit;
         } catch (Exception e) {
             return -1;
         }
-        return 0;
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la temperatura en grados centígrados: ");
+        double celsius = scanner.nextDouble();
+        double resultado = convertirCelsiusAFahrenheit(celsius);
+        if (resultado == -1) {
+            System.out.println("Error: La temperatura no es válida");
+        } else {
+            System.out.println(celsius + " grados centígrados es igual a " + resultado + " grados Fahrenheit");
+        }
+    }
+}
     // Solicitar al usuario ingresar Nro de Días nro de horas nro de minutos y nro segundos y convertir todo a segundos.
+   import java.util.Scanner;
+
+public class ConvertirATotalSegundos {
     public static int convertirATotalSegundos(int dias, int horas, int minutos, int segundos) {
         try {
-            // Lógica interna
+            // Verificar si los valores son válidos
+            if (dias < 0 || horas < 0 || minutos < 0 || segundos < 0) {
+                throw new Exception("Los valores no pueden ser negativos");
+            }
+
+            // Convertir días a segundos
+            int segundosDias = dias * 24 * 60 * 60;
+
+            // Convertir horas a segundos
+            int segundosHoras = horas * 60 * 60;
+
+            // Convertir minutos a segundos
+            int segundosMinutos = minutos * 60;
+
+            // Calcular el total de segundos
+            int totalSegundos = segundosDias + segundosHoras + segundosMinutos + segundos;
+
+            // Retornar el valor
+            return totalSegundos;
         } catch (Exception e) {
             return -1;
         }
-        return 0;
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el número de días: ");
+        int dias = scanner.nextInt();
+        System.out.print("Ingrese el número de horas: ");
+        int horas = scanner.nextInt();
+        System.out.print("Ingrese el número de minutos: ");
+        int minutos = scanner.nextInt();
+        System.out.print("Ingrese el número de segundos: ");
+        int segundos = scanner.nextInt();
+        int resultado = convertirATotalSegundos(dias, horas, minutos, segundos);
+        if (resultado == -1) {
+            System.out.println("Error: Los valores no son válidos");
+        } else {
+            System.out.println(dias + " días, " + horas + " horas, " + minutos + " minutos y " + segundos + " segundos es igual a " + resultado + " segundos");
+        }
+    }
+}
     // Un usuario tiene un sistema de báscula para pesar camiones, dado el peso de un camión debe sacar el peso neto de la carga en kilos y toneladas
     // retorne el valor en formato string (pesoEnKg + "|" + pesoEnToneladas)
     public static String calcularPesoNeto(double peso) {
@@ -77,137 +232,427 @@ public class App {
         return "";
     }
 
-    // Diseñe un algoritmo que calcule el tiempo necesario para alcanzar un destino dado por el usuario quien además ingresará la velocidad promedio en kilómetros/hora y la distancia en kilómetros
-    public static int calcularTiempoViaje(double distancia, double velocidadKilometros, double velocidadHora) {
+   public class CalcularPesoNeto {
+    public static String calcularPesoNeto(double peso) {
         try {
-            // Lógica interna
+            // Verificar si el peso es válido
+            if (peso <= 0) {
+                throw new Exception("El peso debe ser mayor que cero");
+            }
+
+            // Calcular el peso en kilos
+            double pesoEnKg = peso;
+
+            // Calcular el peso en toneladas
+            double pesoEnToneladas = pesoEnKg / 1000;
+
+            // Formatear el resultado
+            String resultado = String.format("%.2f|%.2f", pesoEnKg, pesoEnToneladas);
+
+            // Retornar el valor
+            return resultado;
         } catch (Exception e) {
-            return -1;
+            return "0|0";
         }
-        return 0;
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el peso del camión: ");
+        double peso = scanner.nextDouble();
+        String resultado = calcularPesoNeto(peso);
+        System.out.println("El peso neto de la carga es: " + resultado);
+    }
+}
     // Un avión necesita cargar combustible para cubrir sus rutas programadas en el día. Cada 0.2 toneladas de combustible puede recorrer 60.8 Km en velocidad de crucero. En el despegue el avión consume 1.2 toneladas de combustible y en el aterrizaje consume 0.4 toneladas. El piloto desea un algoritmo que ingresando 4 rutas y el kilometraje de cada ruta obtenga la cantidad de combustible que debe tanquear en el avión.
+    public class CalcularCombustible {
     public static int calcularCombustible(double ruta1, double ruta2, double ruta3, double ruta4) {
         try {
-            // Lógica interna
+            // Verificar si las rutas son válidas
+            if (ruta1 <= 0 || ruta2 <= 0 || ruta3 <= 0 || ruta4 <= 0) {
+                throw new Exception("Las rutas deben ser mayores que cero");
+            }
+
+            // Calcular el total de kilometraje
+            double totalKm = ruta1 + ruta2 + ruta3 + ruta4;
+
+            // Calcular el combustible necesario para el vuelo
+            double combustibleVuelo = totalKm / 60.8;
+
+            // Calcular el combustible adicional para despegue y aterrizaje
+            double combustibleAdicional = 1.2 + 0.4;
+
+            // Calcular el total de combustible necesario
+            double totalCombustible = combustibleVuelo + combustibleAdicional;
+
+            // Convertir el total de combustible a toneladas
+            int totalToneladas = (int) Math.ceil(totalCombustible / 0.2);
+
+            // Retornar el valor
+            return totalToneladas;
         } catch (Exception e) {
             return -1;
         }
-        return 0;
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el kilometraje de la ruta 1: ");
+        double ruta1 = scanner.nextDouble();
+        System.out.print("Ingrese el kilometraje de la ruta 2: ");
+        double ruta2 = scanner.nextDouble();
+        System.out.print("Ingrese el kilometraje de la ruta 3: ");
+        double ruta3 = scanner.nextDouble();
+        System.out.print("Ingrese el kilometraje de la ruta 4: ");
+        double ruta4 = scanner.nextDouble();
+        int totalToneladas = calcularCombustible(ruta1, ruta2, ruta3, ruta4);
+        if (totalToneladas == -1) {
+            System.out.println("Error: Las rutas no son válidas");
+        } else {
+            System.out.println("El avión debe tanquear " + totalToneladas + " toneladas de combustible");
+        }
+    }
+}
     // Diseñar un algoritmo que calcule el peso neto en la luna de un peso terrestre ingresado por teclado. La gravedad de la Luna es de alrededor del 17% más que la de la tierra
+   public class CalcularPesoLunar {
     public static int calcularPesoLunar(double pesoTierra) {
         try {
-            // Lógica interna
+            // Verificar si el peso terrestre es válido
+            if (pesoTierra <= 0) {
+                throw new Exception("El peso terrestre debe ser mayor que cero");
+            }
+
+            // Calcular el peso lunar
+            double gravedadLuna = 0.17; // 17% de la gravedad de la Tierra
+            double pesoLuna = pesoTierra * (1 - gravedadLuna);
+
+            // Redondear el peso lunar a la unidad más cercana
+            int pesoLunarRedondeado = (int) Math.round(pesoLuna);
+
+            // Retornar el valor
+            return pesoLunarRedondeado;
         } catch (Exception e) {
             return -1;
         }
-        return 0;
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el peso terrestre: ");
+        double pesoTierra = scanner.nextDouble();
+        int pesoLunar = calcularPesoLunar(pesoTierra);
+        if (pesoLunar == -1) {
+            System.out.println("Error: El peso terrestre no es válido");
+        } else {
+            System.out.println("El peso neto en la luna es: " + pesoLunar + " kg");
+        }
+    }
+}
     // Diseñar un algoritmo que calcule el saldo que debe haber en una taquilla de un banco. El cajero deberá ingresar la base el total de recaudos y el total de retiros
+   public class CalcularSaldoTaquilla {
     public static int calcularSaldoTaquilla(double base, double ingresos, double retiros) {
         try {
-            // Lógica interna
+            // Verificar si los valores son válidos
+            if (base < 0 || ingresos < 0 || retiros < 0) {
+                throw new Exception("Los valores deben ser mayores o iguales que cero");
+            }
+
+            // Calcular el saldo
+            double saldo = base + ingresos - retiros;
+
+            // Verificar si el saldo es válido
+            if (saldo < 0) {
+                throw new Exception("El saldo no puede ser negativo");
+            }
+
+            // Redondear el saldo a la unidad más cercana
+            int saldoRedondeado = (int) Math.round(saldo);
+
+            // Retornar el valor
+            return saldoRedondeado;
         } catch (Exception e) {
             return -1;
         }
-        return 0;
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la base: ");
+        double base = scanner.nextDouble();
+        System.out.print("Ingrese el total de ingresos: ");
+        double ingresos = scanner.nextDouble();
+        System.out.print("Ingrese el total de retiros: ");
+        double retiros = scanner.nextDouble();
+        int saldo = calcularSaldoTaquilla(base, ingresos, retiros);
+        if (saldo == -1) {
+            System.out.println("Error: Los valores no son válidos");
+        } else {
+            System.out.println("El saldo que debe haber en la taquilla es: " + saldo);
+        }
+    }
+}
     // Diseñe un algoritmo para calcular la propina en un restaurante(10%) el impuesto al consumo (8%) y el valor final que deberá pagar ingresando el valor de la comida.
     // retorne el valor en formato string (propina + "|" + impuesto + "|" + total)
+public class CalcularCuentaRestaurante {
     public static String calcularCuentaRestaurante(double costoComida) {
         try {
-            // Lógica interna
+            // Verificar si el costo de la comida es válido
+            if (costoComida <= 0) {
+                throw new Exception("El costo de la comida debe ser mayor que cero");
+            }
+
+            // Calcular la propina (10%)
+            double propina = costoComida * 0.10;
+
+            // Calcular el impuesto al consumo (8%)
+            double impuesto = costoComida * 0.08;
+
+            // Calcular el valor final
+            double valorFinal = costoComida + propina + impuesto;
+
+            // Formatear el resultado como string
+            String resultado = String.format("%.2f|%.2f|%.2f", propina, impuesto, valorFinal);
+
+            // Retornar el valor
+            return resultado;
         } catch (Exception e) {
-            return -1 + "|" + -1 + "|" + -1;
+            return "-1|-1|-1";
         }
-        return "";
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el costo de la comida: ");
+        double costoComida = scanner.nextDouble();
+        String resultado = calcularCuentaRestaurante(costoComida);
+        System.out.println("Propina|Impuesto|Total: " + resultado);
+    }
+}
+
     // Diseñar un algoritmo que obtenga los puntos finales de un equipo de fútbol (puntuación según lineamientos de Fifa) a partir de los datos ingresados por teclado: Número de partidos ganados número de partidos perdidos número de partidos empatados.
+public class CalcularPuntosFutbol {
     public static int calcularPuntosFutbol(int ganados, int perdidos, int empatados) {
         try {
-            // Lógica interna
+            // Verificar si los valores son válidos
+            if (ganados < 0 || perdidos < 0 || empatados < 0) {
+                throw new Exception("Los valores deben ser mayores o iguales que cero");
+            }
+
+            // Calcular los puntos según los lineamientos de la FIFA
+            int puntos = ganados * 3 + empatados;
+
+            // Retornar el valor
+            return puntos;
         } catch (Exception e) {
             return -1;
         }
-        return 0;
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el número de partidos ganados: ");
+        int ganados = scanner.nextInt();
+        System.out.print("Ingrese el número de partidos perdidos: ");
+        int perdidos = scanner.nextInt();
+        System.out.print("Ingrese el número de partidos empatados: ");
+        int empatados = scanner.nextInt();
+        int puntos = calcularPuntosFutbol(ganados, perdidos, empatados);
+        if (puntos == -1) {
+            System.out.println("Error: Los valores no son válidos");
+        } else {
+            System.out.println("Los puntos finales del equipo son: " + puntos);
+        }
+    }
+}
     // Elaborar un algoritmo que dadas todas las 5 notas y los 5 porcentajes para una materia calcule la nota final.
+    public class CalcularNotaFinal {
     public static int calcularNotaFinal(double nota1, double nota2, double nota3, double nota4, double nota5,
                                         double porcentaje1, double porcentaje2, double porcentaje3, double porcentaje4, double porcentaje5) {
         try {
-            // Lógica interna
+            // Verificar si los porcentajes suman 100%
+            if (porcentaje1 + porcentaje2 + porcentaje3 + porcentaje4 + porcentaje5!= 100) {
+                throw new Exception("Los porcentajes deben sumar 100%");
+            }
+
+            // Calcular la nota final
+            double notaFinal = (nota1 * porcentaje1 / 100) + (nota2 * porcentaje2 / 100) +
+                               (nota3 * porcentaje3 / 100) + (nota4 * porcentaje4 / 100) +
+                               (nota5 * porcentaje5 / 100);
+
+            // Redondear la nota final a un entero
+            int notaFinalRedondeada = (int) Math.round(notaFinal);
+
+            // Retornar el valor
+            return notaFinalRedondeada;
         } catch (Exception e) {
             return -1;
         }
-        return 0;
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la nota 1: ");
+        double nota1 = scanner.nextDouble();
+        System.out.print("Ingrese la nota 2: ");
+        double nota2 = scanner.nextDouble();
+        System.out.print("Ingrese la nota 3: ");
+        double nota3 = scanner.nextDouble();
+        System.out.print("Ingrese la nota 4: ");
+        double nota4 = scanner.nextDouble();
+        System.out.print("Ingrese la nota 5: ");
+        double nota5 = scanner.nextDouble();
+        System.out.print("Ingrese el porcentaje 1: ");
+        double porcentaje1 = scanner.nextDouble();
+        System.out.print("Ingrese el porcentaje 2: ");
+        double porcentaje2 = scanner.nextDouble();
+        System.out.print("Ingrese el porcentaje 3: ");
+        double porcentaje3 = scanner.nextDouble();
+        System.out.print("Ingrese el porcentaje 4: ");
+        double porcentaje4 = scanner.nextDouble();
+        System.out.print("Ingrese el porcentaje 5: ");
+        double porcentaje5 = scanner.nextDouble();
+        int notaFinal = calcularNotaFinal(nota1, nota2, nota3, nota4, nota5, porcentaje1, porcentaje2, porcentaje3, porcentaje4, porcentaje5);
+        if (notaFinal == -1) {
+            System.out.println("Error: Los porcentajes no suman 100%");
+        } else {
+            System.out.println("La nota final es: " + notaFinal);
+        }
+    }
+}
 
     // Elaborar un algoritmo que dados los 5 porcentajes de una materia y las 4 primeras notas calcule cuánto tiene que sacar para ganar si el puntaje mínimo es 3.
     public static int calcularNotaNecesaria(double porcentaje1, double porcentaje2, double porcentaje3, double porcentaje4, double porcentaje5, double nota1, double nota2, double nota3, double nota4) {
-        try {
-            // Lógica interna
-        } catch (Exception e) {
-            return -1;
+    try {
+        // Verificar si los porcentajes suman 100%
+        if (porcentaje1 + porcentaje2 + porcentaje3 + porcentaje4 + porcentaje5!= 100) {
+            throw new Exception("Los porcentajes deben sumar 100%");
         }
-        return 0;
-    }
 
+        // Calcular la nota total actual
+        double notaTotalActual = (nota1 * porcentaje1 / 100) + (nota2 * porcentaje2 / 100) +
+                                 (nota3 * porcentaje3 / 100) + (nota4 * porcentaje4 / 100);
+
+        // Calcular la nota necesaria para ganar
+        double notaNecesaria = (3 * 100 - notaTotalActual * 100) / porcentaje5;
+
+        // Redondear la nota necesaria a un entero
+        int notaNecesariaRedondeada = (int) Math.ceil(notaNecesaria);
+
+        // Retornar el valor
+        return notaNecesariaRedondeada;
+    } catch (Exception e) {
+        return -1;
+    }
+}
     // Se requiere un algoritmo para calcular el salario a pagar a un trabajador con los siguientes datos ingresados por teclado: cantidad de horas normales laboradas cantidad de horas extras diurnas laboradas cantidad de horas extras nocturnas laboradas valor de la hora normal. El valor de las horas extras diurnas tienen un recargo adicional del 15% sobre la hora normal. El valor de las horas extras nocturnas tienen un recargo adicional del 35% sobre la hora normal.
-    public static int calcularSalario(int horasNormales, int horasExtrasDiurnas, int horasExtrasNocturnas, double valorHoraNormal) {
-        try {
-            // Lógica interna
-        } catch (Exception e) {
-            return -1;
-        }
-        return 0;
-    }
+public static double calcularSalario(int horasNormales, int horasExtrasDiurnas, int horasExtrasNocturnas, double valorHoraNormal) {
+    try {
+        // Calcular el salario por horas normales
+        double salarioNormales = horasNormales * valorHoraNormal;
 
+        // Calcular el salario por horas extras diurnas
+        double salarioExtrasDiurnas = horasExtrasDiurnas * valorHoraNormal * 1.15;
+
+        // Calcular el salario por horas extras nocturnas
+        double salarioExtrasNocturnas = horasExtrasNocturnas * valorHoraNormal * 1.35;
+
+        // Calcular el salario total
+        double salarioTotal = salarioNormales + salarioExtrasDiurnas + salarioExtrasNocturnas;
+
+        // Retornar el valor
+        return salarioTotal;
+    } catch (Exception e) {
+        return -1;
+    }
+}
     // Diseñe un algoritmo que calcule el área de un triángulo rectángulo.
-    public static int calcularAreaTriangulo(double base, double altura) {
-        try {
-            // Lógica interna
-        } catch (Exception e) {
-            return -1;
+public static double calcularAreaTriangulo(double base, double altura) {
+    try {
+        // Verificar si la base y la altura son válidas
+        if (base <= 0 || altura <= 0) {
+            throw new Exception("La base y la altura deben ser números positivos");
         }
-        return 0;
-    }
 
-    // Diseñe un algoritmo que calcule el perímetro de un cuadrado.
-    public static int calcularPerimetroCuadrado(double lado) {
-        try {
-            // Lógica interna
-        } catch (Exception e) {
-            return -1;
-        }
-        return 0;
+        // Calcular el área del triángulo
+        double area = (base * altura) / 2;
+
+        // Retornar el valor
+        return area;
+    } catch (Exception e) {
+        return -1;
     }
+}
+    // Diseñe un algoritmo que calcule el perímetro de un cuadrado.
+   public static int calcularPerimetroCuadrado(double lado) {
+    try {
+        // Verificar si el lado es válido
+        if (lado <= 0) {
+            throw new Exception("El lado del cuadrado debe ser un número positivo");
+        }
+
+        // Calcular el perímetro del cuadrado
+        int perimetro = (int) (4 * lado);
+
+        // Retornar el valor
+        return perimetro;
+    } catch (Exception e) {
+        return -1;
+    }
+}
 
     // Diseñe un algoritmo que calcule el volumen de un cilindro.
-    public static int calcularVolumenCilindro(double radio, double altura) {
-        try {
-            // Lógica interna
-        } catch (Exception e) {
-            return -1;
+public static double calcularVolumenCilindro(double radio, double altura) {
+    try {
+        // Verificar si los parámetros son válidos
+        if (radio <= 0 || altura <= 0) {
+            throw new Exception("El radio y la altura del cilindro deben ser números positivos");
         }
-        return 0;
+
+        // Calcular el volumen del cilindro
+        double volumen = Math.PI * Math.pow(radio, 2) * altura;
+
+        // Retornar el valor
+        return volumen;
+    } catch (Exception e) {
+        return -1;
     }
+}
 
     // Diseñe un algoritmo que calcule el área del círculo. El radio se pide por teclado.
-    public static int calcularAreaCirculo(double radio) {
+    import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el radio del círculo: ");
+        double radio = scanner.nextDouble();
+
+        double area = calcularAreaCirculo(radio);
+
+        if (area == -1) {
+            System.out.println("Error al calcular el área del círculo");
+        } else {
+            System.out.println("El área del círculo es: " + area);
+        }
+    }
+
+    public static double calcularAreaCirculo(double radio) {
         try {
-            // Lógica interna
+            // Verificar si el radio es válido
+            if (radio <= 0) {
+                throw new Exception("El radio del círculo debe ser un número positivo");
+            }
+
+            // Calcular el área del círculo
+            double area = Math.PI * Math.pow(radio, 2);
+
+            // Retornar el valor
+            return area;
         } catch (Exception e) {
             return -1;
         }
-        return 0;
     }
+}
 
     public static void main(String[] args) {
         
